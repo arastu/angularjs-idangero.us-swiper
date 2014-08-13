@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html ng-app="test">
+<head>
+	<title>Angularjs Playground</title>
+    <script src="vendor/angular.js"></script>
+    <script defer src="vendor/angular-ui-router.js"></script>
+
+    <link rel="stylesheet" href="vendor/Swiper-2.6.1/src/idangerous.swiper.css">
+  	<script defer src="vendor/Swiper-2.6.1/src/idangerous.swiper.js"></script>
+
+  	<link rel="stylesheet" href="vendor/Swiper-Scrollbar-2.4.1/lib/idangerous.swiper.scrollbar.css">
+  	<script defer src="vendor/Swiper-Scrollbar-2.4.1/lib/idangerous.swiper.scrollbar.js"></script>
+
+  	<link rel="stylesheet" href="style.css">
+
+  	<script type="text/javascript">
+  		var app = angular.module('test', ['ui.router']);
+  		app.config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider,$stateProvider) {
+		    $stateProvider
+		        .state('test', {
+		            url: "/test",
+		            controller: 'ctrl',
+		            templateUrl: "view.html"
+		        })
+		}]);
+		app.controller('ctrl', ['$scope', function ($scope) {
+			$scope.foos = new Array(20);
+			$scope.clicked = function(index) {
+				alert(index)
+			}
+
+			$scope.$on('ngRepeatFinished', function () {
+				var mySwiper = new Swiper('.swiper-container',{
+				    //Your options here:
+				    mode:'horizontal',
+				    loop: false,
+				    keyboardControl: true,
+				    mousewheelControl: true,
+				    slidesPerView: 3.5,
+				    onSlideClick: function (swiper) {
+				    	angular.element(swiper.clickedSlide).scope().clicked(angular.element(swiper.clickedSlide).scope().$index)
+				    },
+				    scrollbar: {
+				        container : '.swiper-scrollbar',
+				        draggable : true,
+				        hide: false,
+				        snapOnRelease: true,
+
+				    }
+				});
+			});
+
+
+		}]);
+		app.directive('endRepeat', ['$timeout', function ($timeout) {
+			return {
+				restrict: 'A',
+				link: function (scope, element, attr) {
+					if (scope.$last === true) {
+						$timeout(function () {
+							scope.$emit('ngRepeatFinished');
+						});
+					}
+				}
+			}
+		}]);
+  	</script>
+</head>
+<body ui-view>
+
+</body>
+</html>

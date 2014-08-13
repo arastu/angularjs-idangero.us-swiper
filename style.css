@@ -1,0 +1,29 @@
+
+.red {
+	background-color: red;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.swiper-container {
+	width: 700px;
+	height: 200px;
+}
+.swiper-wrapper {
+	cursor: move;
+}
+.swiper-slide {
+	height: 200px;
+	width: 200px;
+	color:#fff;
+	font-size:25px;
+	text-align:center;
+	line-height:200px;
+}
+.swiper-scrollbar {
+	height:10px;
+	margin:20px auto;
+	width: 700px;
+}

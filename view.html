@@ -1,0 +1,9 @@
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		<div ng-repeat="foo in foos track by $index" end-repeat class="swiper-slide" ng-class="{'red': $index % 2 != 0, 'blue': $index % 2 == 0}" style="text-align: center; font-size: 50 px;"> 
+			{{$index}}
+		</div>
+	</div>
+</div>
+<!-- Scrollbar: -->
+<div class="swiper-scrollbar"></div>
